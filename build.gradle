@@ -1,6 +1,12 @@
+plugins {
+    id 'jacoco'
+    id 'com.github.kt3k.coveralls' version '2.6.3'
+}
+
 apply from: 'https://raw.githubusercontent.com/concordion/concordion-extension-build/master/extension-build.gradle'
 
 description = 'An extension to Concordion that adds timings'
+
 
 ext {
     developers = {
@@ -43,6 +49,13 @@ githubPages {
         from('build/docs/javadoc/') {
             into 'api'
         }
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true // coveralls plugin depends on xml format report
+        html.enabled = true
     }
 }
 
